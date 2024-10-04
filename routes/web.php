@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 Route::get('/aluno', action: [AlunoController::class, 'index'])
                                     ->name('aluno.form');
+
+Route:: resource('aluno',
+     AlunoController::class);
