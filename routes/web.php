@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+/*
 Route::get('/aluno', action: [AlunoController::class, 'index'])
                                     ->name('aluno.form');
-
+*/
+Route::post('aluno/search',[AlunoController::class, 'search'])->name('aluno.search');
 Route:: resource('aluno',
      AlunoController::class);

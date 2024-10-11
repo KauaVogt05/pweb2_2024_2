@@ -58,6 +58,13 @@
             @elseif(!empty(old('telefone'))){{old('telefone')}}
             @else{{''}}@endif"><br>
 
+            <lebel>Categoria</lebel>
+            <select name="categoria_id">
+                @foreach ($categorias as $categoria)
+                <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+                 @endforeach
+            </select><br>
+
             <button type="submit">Salvar</button>
             <button><a href="{{url('aluno')}}">Voltar</a></button>
     </form>

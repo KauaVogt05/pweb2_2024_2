@@ -7,7 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post" >
+    <form action="{{route('aluno.search')}}" method="post" >
+        @csrf
         <select name="tipo">
             <option value="nome">Nome</option>
             <option value="cpf">CPF</option>
@@ -22,8 +23,9 @@
 <tr>
     <th>ID</th>
     <th>Nome</th>
-    <th>Telefone</th>
     <th>Cpf</th>
+    <th>Telefone</th>
+    <th>Categoria</th>
     <th>Ação</th>
     <th>Ação</th>
 </tr>
@@ -35,7 +37,17 @@
             <td>{{$item->nome}}</td>
             <td>{{$item->cpf}}</td>
             <td>{{$item->telefone}}</td>
+            <td>{{$item->categoria->nome ?? ""}}</td>
             <td><a href="{{route('aluno.edit', $item->id)}}">Editar</a></td>
+            <td>
+                <form action="{{route('aluno.destroy', $item ->id)}}" method="post">
+                @method('DELETE')
+                @csrf
+                <button type="submit"
+                    onclick="return confirm('Deseja remover o registro?')">
+                    Deletar
+                </button>
+            </td>
         </tr>
     @endforeach
 </tbody>
