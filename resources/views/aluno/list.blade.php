@@ -1,39 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('base')
+@section('titulo', 'Listagem Alunos')
+@section('conteudo')
+
+    <h3>Listagem Alunos</h3>
+<div class="row mb-4">
     <form action="{{route('aluno.search')}}" method="post" >
         @csrf
-        <select name="tipo">
-            <option value="nome">Nome</option>
-            <option value="cpf">CPF</option>
-            <option value="telefone">Telefone</option>
-        </select>
-        <input type="text" name="valor">
-        <button type="submit">Buscar</button>
-        <button><a href="{{url('aluno/create')}}">Novo</a></button>
+        <div class="row">
+            <div class="col-3">
+
+            <select name="tipo" class="form-select">
+                    <option value="nome">Nome</option>
+                    <option value="cpf">CPF</option>
+                    <option value="telefone">Telefone</option>
+            </select>
+            </div>
+
+            <div class="col-4">
+                <input type="text" name="valor" class="form-control">
+            </div>
+
+            <div class="col-5">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a class="btn btn-success" href="{{url('aluno/create')}}">Novo</a></button>
+            </div>
+
+        </div>
     </form>
-<table>
+</div>
+<div class="row">
+<table class="table table-striped table-hover">
 <thead>
 <tr>
-    <th>ID</th>
-    <th>Nome</th>
-    <th>Cpf</th>
-    <th>Telefone</th>
-    <th>Categoria</th>
-    <th>Ação</th>
-    <th>Ação</th>
+    <th scope="col">ID</th>
+    <th scope="col">Imagem</th>
+    <th scope="col">Nome</th>
+    <th scope="col">Cpf</th>
+    <th scope="col">Telefone</th>
+    <th scope="col">Categoria</th>
+    <th scope="col">Ação</th>
+    <th scope="col">Ação</th>
 </tr>
 </thead>
 <tbody>
     @foreach ($dados as $item)
+         @php
+            $nome_imagem = !empty($item->imagem) ? $item->imagem : "sem_imagem.jpg";
+         @endphp
         <tr>
             <td>{{$item->id}}</td>
+            <td><img src="/storage/{{$nome_imagem}}" width="80px" alt="imagem"></td>
             <td>{{$item->nome}}</td>
             <td>{{$item->cpf}}</td>
             <td>{{$item->telefone}}</td>
@@ -52,7 +68,5 @@
     @endforeach
 </tbody>
 </table>
-
-
-</body>
-</html>
+</div>
+@stop

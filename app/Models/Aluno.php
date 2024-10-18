@@ -16,6 +16,7 @@ class Aluno extends Model
         'cpf',
         'telefone',
         'categoria_id',
+        'imagem',
     ];
     protected $casts=[
         'categoria_id'=>'integer'
